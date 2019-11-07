@@ -3,18 +3,18 @@ $server_names = Get-Content "C:\Users\TMAZECOL\OneDrive - COMPUTACENTER\Document
 #Pour chaque postes de la liste :
 Foreach ($server in $server_names){
     #Creation d'une session pour activer remote Powershell
-    Enter-PSSession $server -Authentication Negotiate 
-    $disk = Get-WmiObject Win32_LogicalDisk -Filter "DeviceID='C:'" |
-    Select-Object Size,FreeSpace
-
-    $disk.Size
-    $diskspace = $disk.FreeSpace/1GB
-    if ($diskspace -gt 20){
-        "ok"
+    $battery = Get-WmiObject -class win32_battery -property BatteryStatus | select-object BatteryStatus
+    $battery.BatteryStatus
+    if($battery.BatteryStatus -eq 2){
+    "plugged in"
     }
     else{
-    "error"
+    "on battery"
     }
 #fermeture de la session remote PowerShell
 Exit-PSSession 
 }
+
+
+
+

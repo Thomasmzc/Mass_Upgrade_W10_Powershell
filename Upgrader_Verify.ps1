@@ -137,7 +137,7 @@
                       ADD-content -path "$MANEPATH\SetupComplete.cmd" -value "Powershell.exe -File $MANEPATH\post_setup.ps1 -WindowStyle Hidden "
                         #Extraire fichiers de l'image disque dans un dossier nommé Win10 placé au même endroit que install.cmd
                         $original_folder = "Upgrade\"
-                        cd "C:\bac_a_sable"
+                        cd $MANEPATH
 
                         $list = ls *.iso | Get-ChildItem -rec | ForEach-Object -Process {$_.FullName}
 
